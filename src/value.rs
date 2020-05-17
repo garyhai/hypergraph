@@ -29,7 +29,7 @@ pub trait Scalar<T> {
     }
 
     fn is_scalar(&self) -> bool {
-        true
+        self.scalar().is_some()
     }
 
     fn to_scalar(&self) -> Option<T> {
@@ -157,11 +157,13 @@ mod tests {
         assert!(Scalar::<i128>::is_scalar(&v1));
         assert!(scalar!(&v1, is, i128));
         assert!(v1.is_integer());
+        assert!(!v1.is_text());
 
         let v2 = MyValue::String("123".into());
         assert!(Scalar::<String>::is_scalar(&v2));
         assert!(scalar!(&v2, is, String));
         assert!(v2.is_text());
+        assert!(!v2.is_integer());
 
         assert_eq!(scalar!(&v1, i128), Some(&0));
         assert_eq!(scalar!(&v2, String), Some(&"123".to_string()));
