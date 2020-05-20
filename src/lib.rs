@@ -9,6 +9,7 @@ System of IoT with Hypergraph Model
 //
 */
 
+pub mod graph;
 pub mod value;
 
 /*
